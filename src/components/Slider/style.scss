@@ -1,0 +1,10 @@
+@use "../../styles/style.scss" as styles;
+
+.slider {
+  width: max-content;
+  border-radius: 5px;
+  background-color: styles.$secondary-color;
+  margin-inline: 0.3rem;
+  color: styles.$primary-text-color;
+  text-align: center;
+}
