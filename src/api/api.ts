@@ -3,7 +3,7 @@ import { pokeApi } from "../utils/axios";
 
 export const getPokemons = async () => {
   try {
-    const response = await pokeApi.get("pokemon/");
+    const response = await pokeApi.get(`pokemon?&limit=1250`);
     return mapToArray(response.data.results);
   } catch (err) {
     throw new Error();

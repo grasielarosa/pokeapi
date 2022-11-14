@@ -22,10 +22,6 @@ const Slider: FC<Item> = ({ item }) => {
   };
   return (
     <div onClick={() => handleClick(item)} className="slider">
-      <img
-        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.id}.png`}
-        alt=""
-      />
       <p
         style={{
           paddingInline: "0.4rem",
