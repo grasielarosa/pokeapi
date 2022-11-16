@@ -33,18 +33,24 @@ const Carousel: FC = () => {
       <div className="container">
         <div className="container__sliders" ref={slideList}>
           {list?.map((elem, index) => (
-            <div
+            <button
               onClick={() => handleClickOnList(index)}
               className="container__slider"
             >
               <p>{elem.name}</p>
-            </div>
+            </button>
           ))}
         </div>
-        <button className="left" onClick={() => handleClick("previous")}>
+        <button
+          className="container__buttons container__buttons--left"
+          onClick={() => handleClick("previous")}
+        >
           <SlArrowLeft size={60} />
         </button>
-        <button className="right" onClick={() => handleClick("next")}>
+        <button
+          className="container__buttons container__buttons--right"
+          onClick={() => handleClick("next")}
+        >
           <SlArrowRight size={60} />
         </button>
       </div>

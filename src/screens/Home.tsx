@@ -10,7 +10,7 @@ const Home = () => {
       <header className="wrapper__header">
         <h1>POKESEARCH</h1>
       </header>
-      <main>
+      <main className="wrapper__main">
         <Circles />
       </main>
       <footer>

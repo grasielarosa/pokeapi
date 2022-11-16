@@ -1,6 +1,7 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getPokeInfo, getPokemons } from "../../api/api";
 import { PokeContext } from "../../context/HighlightPokemons";
+import { nameShortener } from "../../helpers/functions";
 import { PokeList, CardInfo } from "../../types";
 
 interface Category {
@@ -9,7 +10,7 @@ interface Category {
 }
 
 const usePokemons = () => {
-  const { setCurrentPokemons } = useContext(PokeContext);
+  const { currentPokemons, setCurrentPokemons } = useContext(PokeContext);
   const [list, setList] = useState<PokeList[]>();
   const [cardIsVisible, setCardIsVisible] = useState(false);
   const [cardInfo, setCardInfo] = useState<CardInfo>();
@@ -17,38 +18,38 @@ const usePokemons = () => {
   const url =
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/";
 
-  const shortName = (name: string) => {
-    switch (name) {
-      case "attack":
-        return "ATK";
-        break;
-      case "defense":
-        return "DEF";
-        break;
-      case "special-attack":
-        return "SATK";
-        break;
-      case "special-defense":
-        return "SDEF";
-        break;
-      case "speed":
-        return "SPD";
-        break;
-      default:
-        return "HP";
-    }
-  };
-
   const handleClickOnList = (index: number) => {
-    const previusCircle = list![index - 1];
-    const mainCircle = list![index];
-    const nextCircle = list![index + 1];
-
-    setCurrentPokemons({
-      previus: previusCircle,
-      current: mainCircle,
-      next: nextCircle,
-    });
+    if (index === 0 || index >= 900) {
+      if (index === 0) {
+        const previousCircle = list![899];
+        const mainCircle = list![index];
+        const nextCircle = list![index + 1];
+        setCurrentPokemons({
+          previous: previousCircle,
+          current: mainCircle,
+          next: nextCircle,
+        });
+      }
+      if (index === 900) {
+        const previousCircle = list![899];
+        const mainCircle = list![900];
+        const nextCircle = list![0];
+        setCurrentPokemons({
+          previous: previousCircle,
+          current: mainCircle,
+          next: nextCircle,
+        });
+      }
+    } else {
+      const previousCircle = list![index - 1];
+      const mainCircle = list![index];
+      const nextCircle = list![index + 1];
+      setCurrentPokemons({
+        previous: previousCircle,
+        current: mainCircle,
+        next: nextCircle,
+      });
+    }
   };
 
   const handleClickCard = (name: string) => {
@@ -62,9 +63,8 @@ const usePokemons = () => {
       const mainStats = response.stats.map(
         (item: { base_stat: number; stat: { name: string } }) => {
           const percent = (100 * item.base_stat) / 200;
-
           const statistics: Category = {
-            name: shortName(item.stat.name),
+            name: nameShortener(item.stat.name),
             value: percent,
           };
           return statistics;
@@ -82,28 +82,54 @@ const usePokemons = () => {
     setCardIsVisible(true);
   };
 
-  const teste = () => {
+  const handleClickButton = (direction: string) => {
+    if (direction === "next") {
+      const previousCircle = currentPokemons?.current;
+      const mainCircle = currentPokemons?.next;
+      const newPokemon = Number(currentPokemons!.next?.id) + 1;
+      const nextCircle =
+        newPokemon > 900
+          ? list![0]
+          : list!.find((item) => item.id === newPokemon.toString());
+
+      setCurrentPokemons({
+        previous: previousCircle,
+        current: mainCircle,
+        next: nextCircle,
+      });
+    }
+    if (direction === "previous") {
+      const newPokemon = Number(currentPokemons!.previous?.id) - 1;
+      const previousCircle =
+        newPokemon === 0
+          ? list![899]
+          : list!.find((item) => item.id === newPokemon.toString());
+      const mainCircle = currentPokemons?.previous;
+      const nextCircle = currentPokemons?.current;
+
+      setCurrentPokemons({
+        previous: previousCircle,
+        current: mainCircle,
+        next: nextCircle,
+      });
+    }
+  };
+
+  const loadList = () => {
     getPokemons().then((items) => {
       setList(items);
     });
 
     setCurrentPokemons({
-      previus: { id: "1", name: "bulbasaur", avatar: `${url}1.svg` },
+      previous: { id: "1", name: "bulbasaur", avatar: `${url}1.svg` },
       current: { id: "2", name: "ivysaur", avatar: `${url}2.svg` },
       next: { id: "3", name: "venusaur", avatar: `${url}3.svg` },
     });
   };
 
   useEffect(() => {
-    if (!list) {
-      console.log("change");
-      teste();
-    }
+    loadList();
   }, []);
-
-  // useCallback(() => {
-  //   teste();
-  // }, []);
 
   return {
     list,
@@ -111,6 +137,7 @@ const usePokemons = () => {
     cardInfo,
     handleClickOnList,
     handleClickCard,
+    handleClickButton,
     setCardIsVisible,
   };
 };

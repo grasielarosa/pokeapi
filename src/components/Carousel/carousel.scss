@@ -41,7 +41,7 @@ aside {
       white-space: nowrap;
     }
 
-    button {
+    &__buttons {
       position: absolute;
       z-index: 2;
       background: none;
@@ -52,10 +52,10 @@ aside {
       padding: 0 0.5rem;
       color: styles.$primary-color;
 
-      &.left {
+      &--left {
         left: 1rem;
       }
-      &.right {
+      &--right {
         right: 1rem;
       }
     }

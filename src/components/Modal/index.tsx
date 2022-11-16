@@ -1,10 +1,9 @@
 import React, { FC } from "react";
 import { SlArrowLeft } from "react-icons/sl";
 import * as Progress from "@radix-ui/react-progress";
-import "./modal.scss";
 
 import { CardInfo } from "../../types";
-import { usePokemons } from "../../hooks";
+import "./modal.scss";
 
 interface Props {
   cardInfo: CardInfo;

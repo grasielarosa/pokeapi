@@ -9,7 +9,7 @@ import {
 import { PokeList } from "../../types";
 
 type HighlightPokemons = {
-  previus: PokeList;
+  previous: PokeList;
   current: PokeList;
   next: PokeList;
 };

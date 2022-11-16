@@ -11,6 +11,7 @@
   position: relative;
   width: 30%;
   height: 80%;
+  max-height: max-content;
   background-color: styles.$primary-color;
   border-radius: 12px;
   top: 50%;
@@ -48,6 +49,7 @@
 
   &__content {
     height: 70%;
+    min-height: max-content;
     padding-bottom: 1.5rem;
     border-radius: 8px;
     margin: 0px 0.3rem 0.3rem;
