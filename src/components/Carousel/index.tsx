@@ -1,15 +1,11 @@
 import React, { FC, MutableRefObject, useRef } from "react";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 
-import { Slider } from "../Slider";
-import { PokeList } from "../../types";
-import "./style.scss";
+import { usePokemons } from "../../hooks";
+import "./carousel.scss";
 
-interface List {
-  list: PokeList[] | undefined;
-}
-
-const Carousel: FC<List> = ({ list }) => {
+const Carousel: FC = () => {
+  const { list, handleClickOnList } = usePokemons();
   const slideList = useRef() as MutableRefObject<HTMLDivElement>;
 
   const handleClick = (direction: string) => {
@@ -36,8 +32,13 @@ const Carousel: FC<List> = ({ list }) => {
 
       <div className="container">
         <div className="container__sliders" ref={slideList}>
-          {list?.map((elem) => (
-            <Slider key={elem.id} item={elem} />
+          {list?.map((elem, index) => (
+            <div
+              onClick={() => handleClickOnList(index)}
+              className="container__slider"
+            >
+              <p>{elem.name}</p>
+            </div>
           ))}
         </div>
         <button className="left" onClick={() => handleClick("previous")}>

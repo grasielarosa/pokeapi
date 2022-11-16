@@ -1,0 +1,44 @@
+@use "../../styles/style.scss" as styles;
+
+.circles-box {
+  display: flex;
+  margin: auto;
+  width: 45vw;
+  height: max-content;
+
+  &__big {
+    outline: 10px solid styles.$secondary-color;
+    border: 5px solid styles.$primary-color;
+    border-radius: 50%;
+    width: 16rem;
+    height: 16rem;
+    margin-inline: auto;
+    background-color: styles.$secondary-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      max-height: 12rem;
+      max-width: 12rem;
+    }
+  }
+
+  &__small {
+    outline: 10px solid styles.$secondary-color;
+    border: 5px solid styles.$primary-color;
+    border-radius: 50%;
+    width: 8rem;
+    height: 8rem;
+    margin-top: 10rem;
+    background-color: styles.$secondary-color;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    img {
+      max-height: 4rem;
+      max-width: 4rem;
+    }
+  }
+}

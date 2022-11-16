@@ -1,5 +1,5 @@
 import React from "react";
-import { PokeProvider } from "./context/HighlightPokemon";
+import { PokeProvider } from "./context/HighlightPokemons";
 import { Home } from "./screens/Home";
 import "./styles/style.scss";
 

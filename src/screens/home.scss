@@ -1,47 +1,20 @@
 @use "../styles/style.scss" as styles;
 
-main {
-  height: 65vh;
-
-  & .header {
-    height: 50%;
-    background-color: styles.$complementary-color;
-    text-align: center;
+.wrapper {
+  &__header {
     padding: 2rem 2rem;
-    margin-bottom: 0.5rem;
+
+    text-align: center;
+    background-color: styles.$complementary-color;
   }
-
-  & .circles-box {
-    display: flex;
-    margin: auto;
-    width: 40vw;
-
-    &__big {
-      outline: 10px solid styles.$secondary-color;
-      border: 5px solid styles.$primary-color;
-      border-radius: 50%;
-      width: 12rem;
-      height: 12rem;
-      margin-top: calc(0px - 6rem);
-      margin-inline: auto;
-      background-color: styles.$secondary-color;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    &__small {
-      outline: 10px solid styles.$secondary-color;
-      border: 5px solid styles.$primary-color;
-      border-radius: 50%;
-      width: 8rem;
-      height: 8rem;
-      margin-top: 2rem;
-      background-color: styles.$secondary-color;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+  main {
+    height: 50vh;
+    background: linear-gradient(
+      to bottom,
+      styles.$complementary-color 0%,
+      styles.$complementary-color 40%,
+      styles.$main-color 40%,
+      styles.$main-color 100%
+    );
   }
 }

@@ -10,11 +10,11 @@ export const getPokemons = async () => {
   }
 };
 
-// export const getPokeInfo = async (pokemon: string) => {
-//   try {
-//     const response = await pokeApi.get(`pokemon/${pokemon}`);
-//     return response.data;
-//   } catch (err) {
-//     throw new Error();
-//   }
-// };
+export const getPokeInfo = async (pokemon: string) => {
+  try {
+    const response = await pokeApi.get(`pokemon/${pokemon}`);
+    return response.data;
+  } catch (err) {
+    throw new Error();
+  }
+};

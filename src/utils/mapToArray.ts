@@ -8,6 +8,9 @@ export const mapToArray = (object: Props[]) => {
     array.push({
       ...object[elem],
       id: object[elem].url.substring(34, object[elem].url.length - 1),
+      avatar: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${object[
+        elem
+      ].url.substring(34, object[elem].url.length - 1)}.svg`,
     });
   }
   return array;
