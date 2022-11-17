@@ -19,27 +19,24 @@ const usePokemons = () => {
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/";
 
   const handleClickOnList = (index: number) => {
-    if (index === 0 || index >= 900) {
-      if (index === 0) {
-        const previousCircle = list![899];
-        const mainCircle = list![index];
-        const nextCircle = list![index + 1];
-        setCurrentPokemons({
-          previous: previousCircle,
-          current: mainCircle,
-          next: nextCircle,
-        });
-      }
-      if (index === 900) {
-        const previousCircle = list![899];
-        const mainCircle = list![900];
-        const nextCircle = list![0];
-        setCurrentPokemons({
-          previous: previousCircle,
-          current: mainCircle,
-          next: nextCircle,
-        });
-      }
+    if (index === 0) {
+      const previousCircle = list![899];
+      const mainCircle = list![index];
+      const nextCircle = list![index + 1];
+      setCurrentPokemons({
+        previous: previousCircle,
+        current: mainCircle,
+        next: nextCircle,
+      });
+    } else if (index >= 899) {
+      const previousCircle = list![898];
+      const mainCircle = list![899];
+      const nextCircle = list![0];
+      setCurrentPokemons({
+        previous: previousCircle,
+        current: mainCircle,
+        next: nextCircle,
+      });
     } else {
       const previousCircle = list![index - 1];
       const mainCircle = list![index];
